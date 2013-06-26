@@ -1,0 +1,13 @@
+*.depend
+*.layout
+Debug/*
+Release/*
+*.exe
+*.bin
+*.zs
+*.cbTemp
+*.yml
+Git Shell.lnk
+Changes.txt
+.objs/*
+HiveGame_build_log.html
