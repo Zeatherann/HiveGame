@@ -37,11 +37,12 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-Wall" />
+			<Add option="-std=c++11" />
 			<Add option="-fexceptions" />
-			<Add option="-DSFML_STATIC" />
 		</Compiler>
 		<Unit filename="AppState.hpp" />
+		<Unit filename="EventHandler.cpp" />
+		<Unit filename="EventHandler.hpp" />
 		<Unit filename="Game.cpp" />
 		<Unit filename="Game.hpp" />
 		<Unit filename="main.cpp" />

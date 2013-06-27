@@ -1,53 +1,67 @@
 #include "main.hpp"
 
-Game::Game() : state(as_Null),running(false)
+Game::Game() : Window(),Running(false),IsPaused(false),State(as_Null),Events()
 {
 }
 
 bool Game::initialize()
 {
-    window.create(sf::VideoMode(640, 480), "HiveGame");
+    Window=shared_ptr<sf::RenderWindow>(new sf::RenderWindow( {800,640,32},"HiveGame - Asteroids"));
 
     // Configure window
-    window.setFramerateLimit(60);
-    window.setVerticalSyncEnabled(true);
-    window.setKeyRepeatEnabled(true); // Might not need this.
+    Window->setFramerateLimit(60);
+    Window->setVerticalSyncEnabled(true);
+    Window->setKeyRepeatEnabled(false); // Trust me we want it to be false.
+
+    // Add Window Closed event, as well as Window Lose Focus/Gain Focus for auto pausing.
+    Events.AddEvent(sf::Event::Closed,[this](const sf::Event& _unused_)->void {Window->close();Running=false;});
+    Events.AddEvent(sf::Event::LostFocus,[this](const sf::Event& _unused_)->void {pause();});
+    Events.AddEvent(sf::Event::GainedFocus,[this](const sf::Event& _unused_)->void {resume();});
 
     return true;
 }
 
-bool Game::handleEvent(sf::Event& event)
+void Game::pause()
 {
-    switch (state)
+    IsPaused=true;
+}
+void Game::resume()
+{
+    IsPaused=false;
+}
+
+void Game::handleEvents()
+{
+    Events.HandleEvents(*Window.get());
+}
+
+void Game::clear()
+{
+    switch (State)
     {
     case as_Null:
-        break;
     default:
-        break;
+        Window->clear();
     }
-
-    return false;
 }
 
 void Game::update()
 {
-    switch (state)
+    switch (State)
     {
     case as_Null:
-        break;
     default:
-        break;
+        ;
     }
 }
 
 void Game::draw()
 {
-    switch (state)
+    switch (State)
     {
     case as_Null:
-        break;
     default:
-        break;
+        Window->display();
     }
 }
 
@@ -58,16 +72,20 @@ void Game::clean()
 
 int Game::execute()
 {
-    running = initialize();
+    Running = initialize();
 
-    while (running)
+    while (Running)
     {
-        while (window.pollEvent(event))
+        clear();
+        handleEvents();
+        if(!Running)
         {
-            handleEvent(event);
+            break;
         }
-
-        update();
+        if(!IsPaused)
+        {
+            update();
+        }
         draw();
     }
 
