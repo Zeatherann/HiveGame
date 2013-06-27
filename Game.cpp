@@ -1,71 +1,77 @@
-#include "Game.h"
+#include "main.hpp"
 
-Game::Game() : running(false), state(AppState::Null) {
+Game::Game() : state(as_Null),running(false)
+{
 }
 
-bool Game::initialize() {
-	window.create(sf::VideoMode(640, 480), "HiveGame");
+bool Game::initialize()
+{
+    window.create(sf::VideoMode(640, 480), "HiveGame");
 
-	// Configure window
-	window.setFramerateLimit(60);
-	window.setVerticalSyncEnabled(true);
-	window.setKeyRepeatEnabled(true); // Might not need this.
+    // Configure window
+    window.setFramerateLimit(60);
+    window.setVerticalSyncEnabled(true);
+    window.setKeyRepeatEnabled(true); // Might not need this.
 
-	return true;
+    return true;
 }
 
-bool Game::handleEvent() {
-	switch (state) {
-		case Null:
-			break;
-		default:
-			break;
-	}
+bool Game::handleEvent(sf::Event& event)
+{
+    switch (state)
+    {
+    case as_Null:
+        break;
+    default:
+        break;
+    }
 
-	return false;
+    return false;
 }
 
-void Game::update() {
-	switch (state) {
-		case Null:
-			break;
-		default:
-			break;
-	}
+void Game::update()
+{
+    switch (state)
+    {
+    case as_Null:
+        break;
+    default:
+        break;
+    }
 }
 
-void Game::draw() {
-	switch (state) {
-		case Null:
-			break;
-		default:
-			break;
-	}
+void Game::draw()
+{
+    switch (state)
+    {
+    case as_Null:
+        break;
+    default:
+        break;
+    }
 }
 
-void Game::clean() {
-	// Nothing to clean at the moment.
+void Game::clean()
+{
+    // Nothing to clean at the moment.
 }
 
-int Game::execute() {
-	running = initialize();
+int Game::execute()
+{
+    running = initialize();
 
-	while (running) {
-		while (window.pollEvent(event)) {
-			handleEvent();
-		}
+    while (running)
+    {
+        while (window.pollEvent(event))
+        {
+            handleEvent(event);
+        }
 
-		update();
-		draw();
-	}
+        update();
+        draw();
+    }
 
-	clean();
+    clean();
 
-	return 0;
-}
-
-int main() {
-	Game game;
-
-	return game.execute();
+    return 0;
 }
