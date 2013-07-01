@@ -1,4 +1,5 @@
 #include "main.hpp"
+#ifndef TESTRUN
 
 Game::Game() : Window(),Running(false),IsPaused(false),State(as_Null),Events()
 {
@@ -93,3 +94,4 @@ int Game::execute()
 
     return 0;
 }
+#endif

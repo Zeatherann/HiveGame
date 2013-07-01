@@ -1,3 +1,4 @@
+#ifndef TESTRUN
 #ifndef GAME_HPP
 #define GAME_HPP
 class Game
@@ -25,3 +26,4 @@ public:
     int execute();
 };
 #endif // GAME_HPP
+#endif

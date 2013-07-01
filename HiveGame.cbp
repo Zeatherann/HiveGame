@@ -45,6 +45,8 @@
 		<Unit filename="EventHandler.hpp" />
 		<Unit filename="Game.cpp" />
 		<Unit filename="Game.hpp" />
+		<Unit filename="State.cpp" />
+		<Unit filename="State.hpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="main.hpp" />
 		<Extensions>

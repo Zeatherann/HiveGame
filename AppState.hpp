@@ -1,3 +1,4 @@
+#ifndef TESTRUN
 #ifndef APPLICATION_STATE_HPP
 #define APPLICATION_STATE_HPP
 //**********************************************
@@ -15,3 +16,4 @@ enum AppState
     as_Count // Must be last.
 };
 #endif // APPLICATION_STATE_HPP
+#endif
