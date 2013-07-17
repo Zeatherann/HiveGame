@@ -1,8 +1,9 @@
 #ifndef MAIN_HPP
 #define MAIN_HPP
 /// Defines
-//#define TESTRUN
 #define SFML_STATIC
+#define FRAMES_PER_SECOND (60u)
+#define STAR_FIELD_SIZE (512u)
 /// Libraries
 // Standard Library
 #include <iostream>
@@ -12,32 +13,29 @@
 #include <memory>
 // SFML
 #include <SFML/Graphics.hpp>
+// Boost
+#include <boost/lexical_cast.hpp>
 // -----
 /// Namespaces
 using namespace std;
+using boost::lexical_cast;
 /// Class Forward Declarations
-#ifdef TESTRUN
 class State;
-#endif
 /// Enumerations
 /// Structs
 /// Typedefs
 /// Global Variables
-#ifdef TESTRUN
 namespace _G
 {
 extern sf::RenderWindow Window;
 extern shared_ptr<State> CurrentState;
 extern shared_ptr<State> FutureState;
+extern sf::Texture Rock;
 } // namespace Global
-#endif
 /// Global Functions
 /// Project Files
 #include "EventHandler.hpp"
-#ifndef TESTRUN
-#include "AppState.hpp"
-#include "Game.hpp"
-#else
+#include "Asteroid.hpp"
 #include "State.hpp"
-#endif
+#include "LevelState.hpp"
 #endif // MAIN_HPP

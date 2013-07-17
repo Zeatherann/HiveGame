@@ -40,11 +40,12 @@
 			<Add option="-std=c++11" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="AppState.hpp" />
+		<Unit filename="Asteroid.cpp" />
+		<Unit filename="Asteroid.hpp" />
 		<Unit filename="EventHandler.cpp" />
 		<Unit filename="EventHandler.hpp" />
-		<Unit filename="Game.cpp" />
-		<Unit filename="Game.hpp" />
+		<Unit filename="LevelState.cpp" />
+		<Unit filename="LevelState.hpp" />
 		<Unit filename="State.cpp" />
 		<Unit filename="State.hpp" />
 		<Unit filename="main.cpp" />
