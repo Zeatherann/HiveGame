@@ -1,7 +1,7 @@
 #ifndef ASTEROID_HPP
 #define ASTEROID_HPP
-enum AsteroidSize{as_Large,as_Medium,as_Small};
-class Asteroid
+enum AsteroidSize {as_Large,as_Medium,as_Small};
+class Asteroid:public Object
 {
 public:
     static sf::Image Image;

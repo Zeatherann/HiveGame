@@ -61,9 +61,4 @@ sf::RenderWindow Window;
 shared_ptr<State> CurrentState(nullptr);
 shared_ptr<State> FutureState(nullptr);
 sf::Texture Rock;
-
-sf::IntRect GetAsteroidTextureRect(const int& Size)
-{
-
-}
 } // namespace Global
