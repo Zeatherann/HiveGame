@@ -2,6 +2,7 @@
 
 int main()
 {
+    srand(time(nullptr));
     /*
         Lets make use of int main by initializing the global variables (all found _G namespace).
         _G::Window will be our game's window and _G::CurrentState will be the first State that the game enters.
@@ -9,11 +10,14 @@ int main()
     */
     // ----- Initialize -----
 
+    if(!(Asteroid::Image.loadFromFile("Asteroids.png")&&Asteroid::Texture.loadFromImage(Asteroid::Image)))return 1;
+    Asteroid::Image=sf::Image();
     _G::Window.create(sf::VideoMode(800,640,32),"HiveGame - Asteroids",sf::Style::Titlebar|sf::Style::Close);
     _G::Window.setFramerateLimit FRAMES_PER_SECOND;
-    _G::Rock.loadFromFile("Rock.png");
     _G::CurrentState=shared_ptr<State>(new LevelState);
+
     // ----- Game Loop -----
+
     while(true)
     {
         // Clear _G::Window first with the given color from _G::CurrentState.
@@ -57,4 +61,9 @@ sf::RenderWindow Window;
 shared_ptr<State> CurrentState(nullptr);
 shared_ptr<State> FutureState(nullptr);
 sf::Texture Rock;
+
+sf::IntRect GetAsteroidTextureRect(const int& Size)
+{
+
+}
 } // namespace Global

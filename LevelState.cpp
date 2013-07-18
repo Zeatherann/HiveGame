@@ -7,7 +7,7 @@ LevelState::LevelState(const int& Level):Level(Level),StarField(sf::Points,STAR_
     }
     // Create starting asteroids (2+Level).
     Asteroids.resize(2+Level);
-    for(shared_ptr<Asteroid>& Iter:Asteroids)Iter=shared_ptr<Asteroid>(new Asteroid(sf::Vector2f(rand()%800,rand()%640),3));
+    for(shared_ptr<Asteroid>& Iter:Asteroids)Iter=shared_ptr<Asteroid>(new Asteroid(sf::Vector2f(rand()%800,rand()%640),as_Large));
     // Create Player.
 
     // Create Events.
@@ -26,7 +26,8 @@ void LevelState::Render()
     // Render StarField.
     _G::Window.draw(StarField);
     // Render Asteroids.
-    for(const shared_ptr<Asteroid>& Iter:Asteroids){
+    for(const shared_ptr<Asteroid>& Iter:Asteroids)
+    {
         _G::Window.draw(Iter->Sprite);
     }
     // Render Aliens.
@@ -46,4 +47,31 @@ void LevelState::Update()
     // Update Aliens.
     // Update Bullets.
     if(Asteroids.size()<1u)_G::FutureState=shared_ptr<State>(new LevelState(Level+1));
+    set<unsigned int>ToRemove;
+    vector<shared_ptr<Asteroid>> NewAsteroids;
+    for(unsigned int Index=0u;Index<Asteroids.size();Index++)
+    {
+        shared_ptr<Asteroid>& First=Asteroids[Index];
+        float Size1=First->Size==as_Large?48.f:First->Size==as_Medium?24.f:12.f;
+        for(unsigned int Index2=Index;Index2<Asteroids.size();Index2++)
+        {
+            shared_ptr<Asteroid>& Second=Asteroids[Index2];
+            if(First!=Second&&First->Invuln==0&&Second->Invuln==0)
+            {
+                float Size2=Second->Size==as_Large?48.f:Second->Size==as_Medium?24.f:12.f;
+                if(DistanceSquared(First->Location,Second->Location)<=(Size1+Size2)*(Size1+Size2)){
+                    vector<shared_ptr<Asteroid>> New=Asteroid::Split(First);
+                    vector<shared_ptr<Asteroid>> New2=Asteroid::Split(Second);
+                    ToRemove.insert(Index);
+                    ToRemove.insert(Index2);
+                    NewAsteroids.insert(NewAsteroids.end(),New.cbegin(),New.cend());
+                    NewAsteroids.insert(NewAsteroids.end(),New2.cbegin(),New2.cend());
+                }
+            }
+        }
+    }
+    for(const unsigned int& Iter:ToRemove){
+        Asteroids.erase(Asteroids.begin()+Iter);
+    }
+    Asteroids.insert(Asteroids.end(),NewAsteroids.cbegin(),NewAsteroids.cend());
 }
