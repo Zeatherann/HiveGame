@@ -42,12 +42,14 @@
 		</Compiler>
 		<Unit filename="Asteroid.cpp" />
 		<Unit filename="Asteroid.hpp" />
+		<Unit filename="Collision.hpp" />
 		<Unit filename="EventHandler.cpp" />
 		<Unit filename="EventHandler.hpp" />
 		<Unit filename="LevelState.cpp" />
 		<Unit filename="LevelState.hpp" />
 		<Unit filename="Object.cpp" />
 		<Unit filename="Object.hpp" />
+		<Unit filename="Resource.cpp" />
 		<Unit filename="Resource.hpp" />
 		<Unit filename="State.cpp" />
 		<Unit filename="State.hpp" />

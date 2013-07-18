@@ -1,7 +1,7 @@
 #include "main.hpp"
 
-Object::Object(const sf::Texture& Texture,const sf::IntRect& SubRect,const sf::Vector2f Location,const sf::Vector2f Velocity,const sf::Vector2f Angle):
-    Sprite(Texture,SubRect),Location(Location),Velocity(Velocity),Angle(Angle) {}
+Object::Object(const string& Texture,const sf::IntRect& SubRect,const sf::Vector2f Location,const sf::Vector2f Velocity,const sf::Vector2f Angle):
+    TextureName(Texture),Sprite(Textures[Texture],SubRect),Location(Location),Velocity(Velocity),Angle(Angle) {}
 
 Object::~Object() {}
 

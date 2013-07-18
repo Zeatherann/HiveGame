@@ -4,19 +4,28 @@ template<typename ResourceType>class Resource
 {
 public:
     // Variables
-    map<std::string,std::unique_ptr<ResourceType>> Data;
+    typedef map<std::string,std::unique_ptr<ResourceType>> DataType;
+    DataType Data;
     // Functions
     ResourceType& Load(const std::string& Name)
     {
-        ResourceType& Ret=Data[Name];
-        if(Ret.loadFromFile(Name))return Ret;
-        cerr<<"Failed to load resource '"<<Ret<<"'!"<<endl;
+        unique_ptr<ResourceType> Ptr(new ResourceType());
+        if(Ptr->loadFromFile(Name)){
+            unique_ptr<ResourceType>& Holder=Data[Name];
+            Holder.swap(Ptr);
+            return *Holder;
+        }
+        cerr<<"Failed to load resource '"<<Name<<"'!"<<endl;
         exit(1);
     }
     // Operators
     ResourceType& operator[](const std::string& Name)
     {
-        return Data[Name];
+        const typename DataType::const_iterator Iter=Data.find(Name);
+        if(Iter!=Data.cend())return *Iter->second;
+        return *(Data[Name]=unique_ptr<ResourceType>(new ResourceType));
     }
 };
+extern Resource<sf::Texture> Textures;
+extern Resource<sf::Image> Images;
 #endif // RESOURCE_HPP

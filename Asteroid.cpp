@@ -1,8 +1,6 @@
 #include "main.hpp"
-sf::Image Asteroid::Image;
-sf::Texture Asteroid::Texture;
 Asteroid::Asteroid(const sf::Vector2f& Location,AsteroidSize Size):
-    Object(Texture,TextureRect(Size),Location,sf::Vector2f(Random*6.f-3.f,Random*6.f-3.f),sf::Vector2f(Random*360.f,Random*4.f-2.f)),Size(Size),Invuln(30)
+    Object("Asteroids.png",TextureRect(Size),Location,sf::Vector2f(Random*6.f-3.f,Random*6.f-3.f),sf::Vector2f(Random*360.f,Random*4.f-2.f)),Size(Size),Invuln(30)
 {
     switch(Size)
     {

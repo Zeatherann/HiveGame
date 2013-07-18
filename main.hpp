@@ -21,6 +21,7 @@ using namespace std;
 using boost::lexical_cast;
 /// Class Forward Declarations
 class State;
+class Object;
 /// Enumerations
 /// Structs
 /// Typedefs
@@ -42,6 +43,7 @@ inline float DistanceSquared(const sf::Vector2f& P1,const sf::Vector2f& P2)
 }
 #define Random (GetRandomFloat())
 /// Project Files
+#include "Collision.hpp"
 #include "Resource.hpp"
 #include "Object.hpp"
 #include "EventHandler.hpp"

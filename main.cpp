@@ -10,8 +10,7 @@ int main()
     */
     // ----- Initialize -----
 
-    if(!(Asteroid::Image.loadFromFile("Asteroids.png")&&Asteroid::Texture.loadFromImage(Asteroid::Image)))return 1;
-    Asteroid::Image=sf::Image();
+    Textures["Asteroids.png"].loadFromImage(Images.Load("Asteroids.png"));
     _G::Window.create(sf::VideoMode(800,640,32),"HiveGame - Asteroids",sf::Style::Titlebar|sf::Style::Close);
     _G::Window.setFramerateLimit FRAMES_PER_SECOND;
     _G::CurrentState=shared_ptr<State>(new LevelState);

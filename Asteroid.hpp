@@ -4,8 +4,6 @@ enum AsteroidSize {as_Large,as_Medium,as_Small};
 class Asteroid:public Object
 {
 public:
-    static sf::Image Image;
-    static sf::Texture Texture;
     static sf::IntRect TextureRect(AsteroidSize Size);
     static vector<shared_ptr<Asteroid>> Split(const shared_ptr<Asteroid>& self);
     // Variables
