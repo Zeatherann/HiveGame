@@ -17,7 +17,7 @@ vector<Collision>&& SearchForCollisions(vector<shared_ptr<Object>>& objects) {
 			} else {
 				auto copy_finder = [object1, object2](Collision& node) -> bool {
 					return (object1 == node.First && object2 == node.Second) ||
-						   (object2 == node.First && object1 == node.Second);
+					       (object2 == node.First && object1 == node.Second);
 				};
 
 				auto seeked_copy = std::find_if(collisions.begin(), collisions.end(), copy_finder);
