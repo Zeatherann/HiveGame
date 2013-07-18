@@ -32,12 +32,18 @@ extern shared_ptr<State> CurrentState;
 extern shared_ptr<State> FutureState;
 } // namespace Global
 /// Global Functions
-inline float GetRandomFloat(){return float(rand())/float(RAND_MAX);}
-inline float DistanceSquared(const sf::Vector2f& P1,const sf::Vector2f& P2){
+inline float GetRandomFloat()
+{
+    return float(rand())/float(RAND_MAX);
+}
+inline float DistanceSquared(const sf::Vector2f& P1,const sf::Vector2f& P2)
+{
     return (P1.x-P2.x)*(P1.x-P2.x)+(P1.y-P2.y)*(P1.y-P2.y);
 }
 #define Random (GetRandomFloat())
 /// Project Files
+#include "Resource.hpp"
+#include "Object.hpp"
 #include "EventHandler.hpp"
 #include "Asteroid.hpp"
 #include "State.hpp"

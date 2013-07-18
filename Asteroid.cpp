@@ -2,7 +2,7 @@
 sf::Image Asteroid::Image;
 sf::Texture Asteroid::Texture;
 Asteroid::Asteroid(const sf::Vector2f& Location,AsteroidSize Size):
-    Sprite(Texture,TextureRect(Size)),Location(Location),Velocity(Random*6.f-3.f,Random*6.f-3.f),Angle(Random*360.f,Random*4.f-2.f),Size(Size),Invuln(30)
+    Object(Texture,TextureRect(Size),Location,sf::Vector2f(Random*6.f-3.f,Random*6.f-3.f),sf::Vector2f(Random*360.f,Random*4.f-2.f)),Size(Size),Invuln(30)
 {
     switch(Size)
     {
@@ -24,19 +24,18 @@ Asteroid::~Asteroid() {}
 
 void Asteroid::Update()
 {
-    if(Invuln){
-        if(--Invuln==0){
+    Object::Update();
+    if(Invuln)
+    {
+        if(--Invuln==0)
+        {
             Sprite.setColor(sf::Color::White);
         }
     }
-    Location=Location+Velocity;
-    Angle.x+=Angle.y;
-    Sprite.setRotation(Angle.x);
     if(Location.x>800.f)Location.x-=800.f;
     if(Location.y>640.f)Location.y-=640.f;
     if(Location.x<0.f)Location.x+=800.f;
     if(Location.y<0.f)Location.y+=640.f;
-    Sprite.setPosition(Location);
 }
 
 sf::IntRect Asteroid::TextureRect(AsteroidSize Size)
@@ -79,7 +78,8 @@ sf::IntRect Asteroid::TextureRect(AsteroidSize Size)
     }
 }
 
-vector<shared_ptr<Asteroid>> Asteroid::Split(const shared_ptr<Asteroid>& self){
+vector<shared_ptr<Asteroid>> Asteroid::Split(const shared_ptr<Asteroid>& self)
+{
     if(self->Size==as_Small)return vector<shared_ptr<Asteroid>>();
     AsteroidSize NewSize=self->Size==as_Large?as_Medium:as_Small;
     return {shared_ptr<Asteroid>(new Asteroid(self->Location,NewSize)),shared_ptr<Asteroid>(new Asteroid(self->Location,NewSize))};

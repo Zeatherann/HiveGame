@@ -49,17 +49,18 @@ void LevelState::Update()
     if(Asteroids.size()<1u)_G::FutureState=shared_ptr<State>(new LevelState(Level+1));
     set<unsigned int>ToRemove;
     vector<shared_ptr<Asteroid>> NewAsteroids;
-    for(unsigned int Index=0u;Index<Asteroids.size();Index++)
+    for(unsigned int Index=0u; Index<Asteroids.size(); Index++)
     {
         shared_ptr<Asteroid>& First=Asteroids[Index];
         float Size1=First->Size==as_Large?48.f:First->Size==as_Medium?24.f:12.f;
-        for(unsigned int Index2=Index;Index2<Asteroids.size();Index2++)
+        for(unsigned int Index2=Index; Index2<Asteroids.size(); Index2++)
         {
             shared_ptr<Asteroid>& Second=Asteroids[Index2];
             if(First!=Second&&First->Invuln==0&&Second->Invuln==0)
             {
                 float Size2=Second->Size==as_Large?48.f:Second->Size==as_Medium?24.f:12.f;
-                if(DistanceSquared(First->Location,Second->Location)<=(Size1+Size2)*(Size1+Size2)){
+                if(DistanceSquared(First->Location,Second->Location)<=(Size1+Size2)*(Size1+Size2))
+                {
                     vector<shared_ptr<Asteroid>> New=Asteroid::Split(First);
                     vector<shared_ptr<Asteroid>> New2=Asteroid::Split(Second);
                     ToRemove.insert(Index);
@@ -70,7 +71,8 @@ void LevelState::Update()
             }
         }
     }
-    for(const unsigned int& Iter:ToRemove){
+    for(const unsigned int& Iter:ToRemove)
+    {
         Asteroids.erase(Asteroids.begin()+Iter);
     }
     Asteroids.insert(Asteroids.end(),NewAsteroids.cbegin(),NewAsteroids.cend());
