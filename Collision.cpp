@@ -12,9 +12,7 @@ vector<Collision>&& SearchForCollisions(vector<shared_ptr<Object>>& objects) {
 	for (const auto& object1 : objects) {
 		for (const auto& object2 : objects) {
 
-			if (object1 == object2) {
-				continue;
-			} else {
+			if (object1 != object2) {
 				auto copy_finder = [object1, object2](Collision& node) -> bool {
 					return (object1 == node.First && object2 == node.Second) ||
 					       (object2 == node.First && object1 == node.Second);
