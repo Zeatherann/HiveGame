@@ -9,10 +9,6 @@ public:
     static sf::IntRect TextureRect(AsteroidSize Size);
     static vector<shared_ptr<Asteroid>> Split(const shared_ptr<Asteroid>& self);
     // Variables
-    sf::Sprite Sprite;
-    sf::Vector2f Location;
-    sf::Vector2f Velocity;
-    sf::Vector2f Angle;
     AsteroidSize Size;
     int Invuln;
     // Constructor
